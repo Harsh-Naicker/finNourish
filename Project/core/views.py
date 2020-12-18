@@ -219,7 +219,8 @@ def insert_value_to_table(table_name,data_frame):
         print('Connection to database failed')
 
 def get_column_names_from_db_table(sql_cursor,table_name):
-    table_column_names = "PRAGMA table_info("+table_name+");"
+    # table_column_names = "PRAGMA table_info("+table_name+");"
+    table_column_names= "SELECT COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '"+table_name+"'"
     sql_cursor.execute(table_column_names)
     table_column_names = sql_cursor.fetchall()
     
