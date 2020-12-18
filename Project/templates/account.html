@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Aria is a business focused HTML landing page template built with Bootstrap to help you create lead generation websites for companies and their services.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>finNourish</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="../static/bootstrap.css" rel="stylesheet">
+    <link href="../static/fontawesome-all.css" rel="stylesheet">
+    <link href="../static/swiper.css" rel="stylesheet">
+	<link href="../static/magnific-popup.css" rel="stylesheet">
+	<link href="../static/styles.css" rel="stylesheet">
+	<!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- Favicon  -->
+    <link rel="icon" href="../static/logo.png">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <!-- Text Logo - Use this if you don't have a graphic logo -->
+        <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Aria</a> -->
+
+        <!-- Image Logo -->
+        <a class="navbar-brand logo-image" href="{{url_for('core.index')}}"><img style="width: 100%; height: 100%" src="../static/finNourish.png" alt="alternative"></a>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <!-- end of mobile menu toggle button -->
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('core.index')}}">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('users.account')}}">ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('users.logout')}}">LOGOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('render_tracker', id=current_user.id)}}" target="_blank">BUDGET TRACKER</a>
+                </li>
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#intro">INTRO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#signup">SIGN UP</a>
+                </li>
+                
+                <!--Login Modal has to be added-->
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#" data-toggle="modal" data-target="#login">LOGIN</a>
+                </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#contact">CONTACT</a>
+                </li>
+            </ul>
+            <!-- <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-facebook-f fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-twitter fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span> -->
+        </div>
+    </nav> <!-- end of navbar -->
+    <!-- end of navbar -->
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-container">
+                            <h1>SMART <span id="js-rotating">BUDGETING, INVESTMENTS, DEPOSITS</span></h1>
+                            <p class="p-heading p-large">JH Solutions is driven to provide you with dedicated budget tracking, smart recommendations for investments and deposits.</p>
+                            
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+    <div id="intro" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <div><h2 style="color:  #14bf98;">Current Assests: ₹{{current_user.current_assets}}</h2></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <!-- Update Profile -->
+    <div id="signup" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title">Update Preferences</div>
+                        <h2>Update your preferences</h2>
+                        <p>Once you update your preferences, you will receive recommendations from us based on your new preferences.</p>
+
+
+
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+
+                    <!-- Contact Form -->
+                    <form id="signupForm" data-toggle="validator" data-focus="false" method="post">
+                        {{form.hidden_tag()}}
+                        <div class="form-group">
+
+                            {{form.email.label()}}
+                            {{form.email(class="form-control-input", id="cemail")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form.username.label()}}
+                            {{form.username(class="form-control-input")}}
+                        </div>
+                        <div class="form-group">
+                            {{form.invpref1.label()}}
+                            {{form.invpref1(class="form-control-input")}}
+                        </div>
+                        <div class="form-group">
+                            {{form.invpref2.label()}}
+                            {{form.invpref2(class="form-control-input")}}
+                            
+                        </div>
+                        <div class="form-group">
+                            {{form.depopref.label()}}
+                            {{form.depopref(class="form-control-input")}}
+                        </div>
+                        
+
+                        <div class="form-group">
+    
+                            {{form.submit(class="form-control-submit-button")}}
+    
+                        </div>
+                    </form>
+                    <!-- end of contact form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form-2 -->
+    <!-- end of Sign up -->
+
+    
+    <!-- Change Password Form -->
+    <div id="signup" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title">CHANGE PASSWORD</div>
+                        <h2>Change your password using this form</h2>
+                        
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+                    
+                    <!-- Contact Form -->
+                    <form id="signupForm" data-toggle="validator" data-focus="false" method="post">
+                        {{form2.hidden_tag()}}
+                        
+                        <div class="form-group">
+    
+                            {{form2.password.label()}}
+                            {{form2.password(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form2.pass_confirm.label()}}
+                            {{form2.pass_confirm(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form2.submit2(class="form-control-submit-button")}}
+    
+                        </div>
+                    </form>
+                    <!-- end of contact form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form-2 -->
+
+
+    <!-- Contact -->
+    <div id="contact" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title">CONTACT</div>
+                        <h2>Get In Touch Using The Form</h2>
+                        
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+                    
+                    <!-- Contact Form -->
+                    <form id="contactForm" data-toggle="validator" data-focus="false" method="post">
+                        {{form4.hidden_tag()}}
+                        <div class="form-group">
+
+                            {{form4.email.label()}}
+                            {{form4.email(class="form-control-input", id="cemail")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form4.name.label()}}
+                            {{form4.name(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form4.message.label()}}
+                            {{form4.message(class="form-control-textarea", id="cmessage")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form4.submit4(class="form-control-submit-button")}}
+    
+                        </div>
+                    </form>
+                    <!-- end of contact form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form-2 -->
+    <!-- end of contact -->
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-container about">
+                        <h4>Few Words About Aria</h4>
+                        <p class="white">We're passionate about delivering the best business growth services for companies just starting out as startups or industry players that have established their market position a long tima ago.</p>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-md-2">
+                    <div class="text-container">
+                        <h4>Links</h4>
+                        <ul class="list-unstyled li-space-lg white">
+                            <li>
+                                <a class="white" href="#your-link">startupguide.com</a>
+                            </li>
+                            <li>
+                                <a class="white" href="terms-conditions.html">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <a class="white" href="privacy-policy.html">Privacy Policy</a>
+                            </li>
+                        </ul>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-md-2">
+                    <div class="text-container">
+                        <h4>Tools</h4>
+                        <ul class="list-unstyled li-space-lg">
+                            <li>
+                                <a class="white" href="#your-link">businessgrowth.com</a>
+                            </li>
+                            <li>
+                               <a class="white" href="#your-link">influencers.com</a>
+                            </li>
+                            <li class="media">
+                                <a class="white" href="#your-link">optimizer.net</a>
+                            </li>
+                        </ul>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-md-2">
+                    <div class="text-container">
+                        <h4>Partners</h4>
+                        <ul class="list-unstyled li-space-lg">
+                            <li>
+                                <a class="white" href="#your-link">unicorns.com</a>
+                            </li>
+                            <li>
+                                <a class="white" href="#your-link">staffmanager.com</a>
+                            </li>
+                            <li>
+                                <a class="white" href="#your-link">association.gov</a>
+                            </li>
+                        </ul>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->  
+    
+
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright © 2020 <a href="#">JH Solutions</a></p>
+                </div> <!-- end of col -->
+            </div> <!-- enf of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of copyright --> 
+    <!-- end of copyright -->
+    
+    	
+    <!-- Scripts -->
+    <script src="../static/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="../static/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="../static/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="../static/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="../static/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="../static/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="../static/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+    <script src="../static/isotope.pkgd.min.js"></script> <!-- Isotope for filter -->
+    <script src="../static/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="../static/scripts.js"></script> <!-- Custom scripts -->
+</body>
+</html>

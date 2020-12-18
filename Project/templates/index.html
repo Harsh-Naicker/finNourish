@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Aria is a business focused HTML landing page template built with Bootstrap to help you create lead generation websites for companies and their services.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>finNourish</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="../static/bootstrap.css" rel="stylesheet">
+    <link href="../static/fontawesome-all.css" rel="stylesheet">
+    <link href="../static/swiper.css" rel="stylesheet">
+	<link href="../static/magnific-popup.css" rel="stylesheet">
+	<link href="../static/styles.css" rel="stylesheet">
+	<!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- Favicon  -->
+    <link rel="icon" href="../static/logo.png">
+
+    <!-- CSS Files for Table -->
+    <!-- <link rel="stylesheet" type="text/css" href="../static/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/animate.css">
+    <link rel="stylesheet" type="text/css" href="../static/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../static/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/main.css"> -->
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <!-- Text Logo - Use this if you don't have a graphic logo -->
+        <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Aria</a> -->
+
+        <!-- Image Logo -->
+        <a class="navbar-brand logo-image" href="{{url_for('core.index')}}"><img style="width: 100%; height: 100%" src="../static/finNourish.png" alt="alternative"></a>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <!-- end of mobile menu toggle button -->
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('core.index')}}">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('users.account')}}">ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('users.logout')}}">LOGOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{url_for('render_tracker', id=current_user.id)}}" target="_blank">BUDGET TRACKER</a>
+                </li>
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#intro">INTRO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#signup">SIGN UP</a>
+                </li>
+                
+                <!--Login Modal has to be added-->
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#" data-toggle="modal" data-target="#login">LOGIN</a>
+                </li>
+                
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#contact">CONTACT</a>
+                </li>
+            </ul>
+            <!-- <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-facebook-f fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-twitter fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span> -->
+        </div>
+    </nav> <!-- end of navbar -->
+    <!-- end of navbar -->
+
+    
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-container">
+                            <h1>SMART <span id="js-rotating">BUDGETING, INVESTMENTS, DEPOSITS</span></h1>
+                            <p class="p-heading p-large">finNourish is driven to provide you with dedicated budget tracking, smart recommendations for investments and deposits.</p>
+                            <a class="btn-solid-lg page-scroll" href="#intro">DISCOVER</a>
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+    {% if not current_user.is_authenticated %}
+    <!-- Intro -->
+    <div id="intro" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="text-container">
+                        <div class="section-title">INTRO</div>
+                        <h2>We Offer Some Of The Best Budgeting And Smart Investment Services In Town</h2>
+                        <p>Keeping track of monthly expenses, profitable and viable investments on the basis of one's financial standings can prove to be tedious.</p>
+                        <p class="testimonial-text">"Our solution tracks and analyses the monthly income and expenses of our users and provides recommendations for smart investments and viable donations on the basis of the preferences provided by the user during their sign up."</p>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-7">
+                    <div class="image-container">
+                        <img class="img-fluid" src="../static/intro_pic.jpg" alt="alternative">
+                    </div> <!-- end of image-container -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of basic-1 -->
+    <!-- end of intro -->
+
+    <!-- Details 1 -->
+	<div id="details" class="accordion">
+		<div class="area-1">
+		</div><!-- end of area-1 on same line and no space between comments to eliminate margin white space --><div class="area-2">
+            
+            <!-- Accordion -->
+            <div class="accordion-container" id="accordionOne">
+                <h2>Track Your Finances To Make Smart Investments</h2>
+                <div class="item">
+                    <div id="headingOne">
+                        <span data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" role="button">
+                            <span class="circle-numbering">1</span><span class="accordion-title">Detailed Budget Tracking</span>
+                        </span>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOne">
+                        <div class="accordion-body" style="text-align: justify;">
+                            We closely monitor your budget to give you insights into your income, expenditure and investments.
+                        </div>
+                    </div>
+                </div> <!-- end of item -->
+            
+                <div class="item">
+                    <div id="headingTwo">
+                        <span class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" role="button">
+                            <span class="circle-numbering">2</span><span class="accordion-title">Personalised Mutual Fund Recommendations</span>
+                        </span>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionOne">
+                        <div class="accordion-body" style="text-align: justify;">
+                            We profile your preferences and bring you personalised recommendations from a huge basket of potential mutual fund investments.
+                        </div>
+                    </div>
+                </div> <!-- end of item -->
+            
+                <div class="item">
+                    <div id="headingThree">
+                        <span class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" role="button">
+                            <span class="circle-numbering">3</span><span class="accordion-title">Personalised Deposit Recommendations</span>
+                        </span>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionOne">
+                        <div class="accordion-body" style="text-align: justify;">
+                            We bring you listings of a wide array of possible fixed deposits and recurring deposits facilitated by various banks.
+                        </div>
+                    </div>
+                </div> <!-- end of item -->
+            </div> <!-- end of accordion-container -->
+            <!-- end of accordion -->
+
+		</div> <!-- end of area-2 -->
+    </div> <!-- end of accordion -->
+    <!-- end of details 1 -->
+
+
+    <!-- Details 2 -->
+	<div class="tabs">
+        <div class="area-1">
+            <div class="tabs-container">
+                
+                <!-- Tabs Links -->
+                <ul class="nav nav-tabs" id="ariaTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="nav-tab-1" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true"><i class="fas fa-th"></i> Tech Stacks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-tab-2" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false"><i class="fas fa-th"></i> Methodology</a>
+                    </li>
+                    
+                </ul>
+                <!-- end of tabs links -->
+                
+                <!-- Tabs Content -->
+                <div class="tab-content" id="ariaTabsContent">
+
+                    <!-- Tab -->
+                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                        <h4>A Wide Varierty of Tech Stacks Have Been Used</h4>
+                        
+                        <!-- Progress Bars in Styles.css -->
+                        <div class="progress-container">
+                            <div class="title">Python 100%</div>
+                            <div class="progress">
+                                <div class="progress-bar first" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="title">Flask Framework 90%</div>
+                            <div class="progress">
+                                <div class="progress-bar second" role="progressbar" aria-valuenow="0" aria-valuemin="90" aria-valuemax="100"></div>
+                            </div>
+                            <div class="title">Dash & Plotly 10%</div>
+                            <div class="progress">
+                                <div class="progress-bar third" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div> <!-- end of progress-container -->
+                        <!-- end of progress bars -->
+                        
+                    </div> <!-- end of tab-pane --> 
+                    <!-- end of tab -->
+
+                    <!-- Tab -->
+                    <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                        <ul class="list-unstyled">
+                            <li class="media">
+                                <div class="media-bullet">1</div>
+                                <div class="media-body" style="text-align: justify;"><strong>Real Time Updation</strong> of investment listings and deposits listings to keep up with changing trends and schemes.</div>
+                            </li>
+                            <li class="media">
+                                <div class="media-bullet">2</div>
+                                <div class="media-body" style="text-align: justify;"><strong>Flexible Updation</strong> of preferences to serve the users as per their needs.</div>
+                            </li>
+                            <li class="media">
+                                <div class="media-bullet">3</div>
+                                <div class="media-body" style="text-align: justify;"><strong>Live Visualisations</strong> of income, expenditure, investments and deposits to provide valuable insights to our customers.</div>
+                            </li>
+                        </ul>
+                        <!-- <ul class="list-unstyled li-space-lg last">
+                            <li class="media">
+                                <div class="media-bullet">4</div>
+                                <div class="media-body"><strong>We're always looking</strong> for industry leaders to help them win their market position</div>
+                            </li>
+                            <li class="media">
+                                <div class="media-bullet">5</div>
+                                <div class="media-body"><strong>Evaluation</strong> is a key aspect of this business and important</div>
+                            </li>
+                            <li class="media">
+                                <div class="media-bullet">6</div>
+                                <div class="media-body"><strong>Ethic</strong> procedures ar alwasy at the base of everything we do</div>
+                            </li>
+                        </ul> -->
+                    </div> <!-- end of tab-pane -->
+                    <!-- end of tab -->
+
+
+                </div> <!-- end of tab-content -->
+                <!-- end of tabs content -->
+
+            </div> <!-- end of tabs-container -->
+        </div><!-- end of area-1 on same line and no space between comments to eliminate margin white space --><div class="area-2"></div> <!-- end of area-2 -->
+    </div> <!-- end of tabs -->
+    <!-- end of details 2 -->
+
+    <!-- Project Lightboxes -->
+    <!-- Lightbox -->
+    <div id="project-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-1.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Online Banking</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-2.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Classic Industry</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-3" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-3.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>BoomBap Audio</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-4" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-4.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Van Moose</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-5" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-5.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Joy Moments</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-6" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-6.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Spark Events</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-7" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-7.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Casual Wear</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+
+    <!-- Lightbox -->
+    <div id="project-8" class="lightbox-basic zoom-anim-dialog mfp-hide">
+        <div class="row">
+            <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+            <div class="col-lg-8">
+                <img class="img-fluid" src="../static/project-8.jpg" alt="alternative">
+            </div> <!-- end of col -->
+            <div class="col-lg-4">
+                <h3>Zazoo Apps</h3>
+                <hr class="line-heading">
+                <h6>Strategy Development</h6>
+                <p>Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current needs</p>
+                <p>By offering the best professional services and quality products in the market. Don't hesitate and get in touch with us.</p>
+                <div class="testimonial-container">
+                    <p class="testimonial-text">Need a solid foundation for your business growth plans? Aria will help you manage sales and meet your current requirements.</p>
+                    <p class="testimonial-author">General Manager</p>
+                </div>
+                <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#projects">BACK</a> 
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+    <!-- end of project lightboxes -->
+
+
+    <!-- Team -->
+    <div class="basic-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Our Team</h2>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- Team Member -->
+                    <div class="team-member">
+                        <div class="image-wrapper">
+                            <img class="img-fluid" src="../static/harsh_naicker.jpeg" style="height: 220px;" alt="alternative">
+                        </div> <!-- end of image-wrapper -->
+                        <p class="p-large">Harsh Naicker</p>
+                        <p class="job-title">Flask App Developer</p>
+                        <span class="social-icons">
+                            <span class="fa-stack">
+                                <a href="#your-link">
+                                    <span class="hexagon"></span>
+                                    <i class="fab fa-linkedin fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <!-- <span class="fa-stack">
+                                <a href="#your-link">
+                                    <span class="hexagon"></span>
+                                    <i class="fab fa-twitter fa-stack-1x"></i>
+                                </a>
+                            </span> -->
+                        </span>
+                    </div> <!-- end of team-member -->
+                    <!-- end of team member -->
+
+                    <!-- Team Member -->
+                    <div class="team-member">
+                        <div class="image-wrapper">
+                            <img class="img-fluid" src="../static/JS.jpeg" style="height: 220px;" alt="alternative">
+                        </div> <!-- end of image wrapper -->
+                        <p class="p-large">JS Abhishek</p>
+                        <p class="job-title">Python Developer</p>
+                        <span class="social-icons">
+                            <span class="fa-stack">
+                                <a href="#your-link">
+                                    <span class="hexagon"></span>
+                                    <i class="fab fa-linkedin fa-stack-1x"></i>
+                                </a>
+                            </span>
+                            <!-- <span class="fa-stack">
+                                <a href="#your-link">
+                                    <span class="hexagon"></span>
+                                    <i class="fab fa-twitter fa-stack-1x"></i>
+                                </a>
+                            </span> -->
+                        </span>
+                    </div> <!-- end of team-member -->
+                    <!-- end of team member -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of basic-2 -->
+    <!-- end of team -->
+
+    
+    <!-- Sign up -->
+    <div id="signup" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title">SIGN UP</div>
+                        <h2>Sign Up with finNourish to avail our services</h2>
+                        <p>You can take the benefit of all our services by signing up with us. Please provide your preferences so that we can provide you a tailored experience.</p>
+
+
+
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+
+                    <!-- Contact Form -->
+                    <form id="signupForm" data-toggle="validator" data-focus="false" method="post">
+                        {{form2.hidden_tag()}}
+                        <div class="form-group">
+
+                            {{form2.email.label()}}
+                            {{form2.email(class="form-control-input", id="cemail")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form2.username.label()}}
+                            {{form2.username(class="form-control-input")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form2.password.label()}}
+                            {{form2.password(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form2.pass_confirm.label()}}
+                            {{form2.pass_confirm(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+                            {{form2.invpref1.label()}}
+                            {{form2.invpref1(class="form-control-input")}}
+                        </div>
+                        <div class="form-group">
+                            {{form2.invpref2.label()}}<br><br>
+                            {{form2.invpref2(class="form-control-input")}}
+                        </div>
+                        <div class="form-group">
+                            {{form2.depopref.label()}}
+                            {{form2.depopref(class="form-control-input")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form2.current_balance.label()}}
+                            {{form2.current_balance(class="form-control-input")}}
+                        </div>
+                        
+
+                        <div class="form-group">
+    
+                            {{form2.submit2(class="form-control-submit-button")}}
+    
+                        </div>
+                    </form>
+                    <!-- end of contact form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form-2 -->
+    <!-- end of Sign up -->
+
+    <!-- Login Modal-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="login">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Log In</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <form id="signupForm" data-toggle="validator" data-focus="false" method="post">
+                        {{form1.hidden_tag()}}
+                        <div class="form-group">
+
+                            {{form1.email.label()}}
+                            {{form1.email(class="form-control-input", id="cemail")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form1.password.label()}}
+                            {{form1.password(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form1.submit1(class="form-control-submit-button")}}
+    
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div id="intro" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <div><h2 style="color:  #14bf98;">Welcome, {{current_user.username}}</h2></div>
+                        <hr>
+                        <!-- <div class="modal-body mx-3"> -->
+                            <form id="signupForm" data-toggle="validator" data-focus="false" method="post">
+                                {{form5.hidden_tag()}}
+                                <div class="form-group">
+                    
+                                    {{form5.submit5(class="form-control-submit-button")}}
+                    
+                                </div>
+                            </form>
+                            <br>
+                            <form class="col-lg-5" id="signupForm" data-toggle="validator" data-focus="false" method="post" style="display: inline-block;">
+                                <div><h2 style="color:  #14bf98;">Update Incomes</h2></div>
+                                {{form6.hidden_tag()}}
+                                <div class="form-group">
+                                    
+                                    {{form6.date.label()}}
+                                    {{form6.date(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                    {{form6.source.label()}}
+                                    {{form6.source(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                    {{form6.name.label()}}
+                                    {{form6.name(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                    {{form6.amount.label()}}
+                                    {{form6.amount(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                    
+                                    {{form6.submit6(class="form-control-submit-button")}}
+                    
+                                </div>
+                            </form>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <form class="col-lg-5" id="signupForm" data-toggle="validator" data-focus="false" method="post" style="display: inline-block;">
+                                <div><h2 style="color:  #14bf98;">Update Expenses</h2></div>
+                                {{form7.hidden_tag()}}
+                                <div class="form-group">
+                                    
+                                    {{form7.date.label()}}
+                                    {{form7.date(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                    {{form7.category.label()}}
+                                    {{form7.category(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                    {{form7.name.label()}}
+                                    {{form7.name(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                                    
+                                    {{form7.amount.label()}}
+                                    {{form7.amount(class="form-control-input")}}
+                    
+                                </div>
+                                <div class="form-group">
+                    
+                                    {{form7.submit7(class="form-control-submit-button")}}
+                    
+                                </div>
+                            </form>
+
+                            
+
+                           
+                    
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of basic-1 -->
+
+    
+    
+    {% if not investments==None %}
+    <div id="intro" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-15">
+                    <div>
+                        <div><h2 style="color:  #14bf98;">Investment Listings: Preference 1 <a class="btn-solid-lg page-scroll" href="#" data-toggle="modal" data-target="#{{investments.items[0].listing_fund_type}}" style="color: white;">{{investments.items[0].listing_fund_type}}</a></h2></div>
+                        <table class="table table-striped table-hover">
+                            <th colspan="1" style="background-color: #14bf98;color: white;">Name</th>
+                            <th colspan="1" style="background-color: #14bf98;color: white;">Category</th>
+                            <th colspan="3" style="background-color: #14bf98;color: white;">Risk</th>
+                            <th style="background-color: #14bf98;color: white;">1 Year Returns</th>
+                            <th style="background-color: #14bf98;color: white;">Rating</th>
+                            <th style="background-color: #14bf98;color: white;">Fund Size (in Cr)</th>
+                            <th style="background-color: #14bf98;color: white;">Link</th>
+                            <!-- <th style="background-color: #14bf98;color: white;">Fund Type</th> -->
+                            {% for investment in investments.items %}
+                            <tr>
+                                <td>{{investment.listing_name}}</td>
+                                <td>{{investment.listing_category}}</td>
+                                <td colspan="3">{{investment.listing_risk}}</td>
+                                <td>{{investment.listing_1yreturns}}</td>
+                                <td>{{investment.listing_rating}}</td>
+                                <td>{{investment.listing_fund_size}}</td>
+                                <td><a class="btn-solid-lg page-scroll" href="{{investment.listing_link}}" target="_blank" style="color: white;">Visit</a></td>
+                                <!-- <td>{{investment.listing_fund_type}}</td> -->
+                            </tr>
+                            {% endfor %}
+
+                        </table>
+                        
+                            
+                    
+                    </div> 
+                </div> 
+                
+            </div> 
+        </div> 
+    </div> 
+
+
+    {% endif %}
+
+    
+
+    {% if not investments2==None %}
+    <div id="intro" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-15">
+                    <div>
+                        <div><h2 style="color:  #14bf98;">Investment Listings: Preference 2 <a class="btn-solid-lg page-scroll" href="#" data-toggle="modal" data-target="#{{investments2.items[0].listing_fund_type}}" style="color: white;">{{investments2.items[0].listing_fund_type}}</a></h2></div>
+                        <table class="table table-striped table-hover">
+                            <th colspan="1" style="background-color: #14bf98;color: white;">Name</th>
+                            <th colspan="1" style="background-color: #14bf98;color: white;">Category</th>
+                            <th colspan="3" style="background-color: #14bf98;color: white;">Risk</th>
+                            <th style="background-color: #14bf98;color: white;">1 Year Returns</th>
+                            <th style="background-color: #14bf98;color: white;">Rating</th>
+                            <th style="background-color: #14bf98;color: white;">Fund Size (in Cr)</th>
+                            <th style="background-color: #14bf98;color: white;">Link</th>
+                            <!-- <th style="background-color: #14bf98;color: white;">Fund Type</th> -->
+                            {% for investment in investments2.items %}
+                            <tr>
+                                <td>{{investment.listing_name}}</td>
+                                <td>{{investment.listing_category}}</td>
+                                <td colspan="3">{{investment.listing_risk}}</td>
+                                <td>{{investment.listing_1yreturns}}</td>
+                                <td>{{investment.listing_rating}}</td>
+                                <td>{{investment.listing_fund_size}}</td>
+                                <td><a class="btn-solid-lg page-scroll" href="{{investment.listing_link}}" target="_blank" style="color: white;">Visit</a></td>
+                                <!-- <td><a class="btn-solid-lg page-scroll" href="#" data-toggle="modal" data-target="#{{investment.listing_fund_type}}" style="color: white;">{{investment.listing_fund_type}}</a></td> -->
+                            </tr>
+                            {% endfor %}
+
+                        </table>
+                        
+                            
+                    
+                    </div> 
+                </div> 
+                
+            </div> 
+        </div> 
+    </div> 
+
+
+    {% endif %}
+    <!-- Equity Mutual Funds -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="Equity_Mutual_Funds">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">What is an Equity Mutual Fund?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        An equity mutual fund invests largely in the stocks of various companies to generate returns. 
+                        Equity fund investments are linked to higher risk as compared to other types of mutual funds. 
+                        Moreover, equity funds are ‘not one size fits all’. There are a variety of equity funds classified by their investment objective that need to be mapped to your risk profile.
+                    </p>
+                </div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Who should invest in Equity Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Your decision to invest in mutual funds must be in sync with your investment horizon, risk profile, and other objectives. 
+                        The same is the case for equity fund investments. If you have a long-term goal, it is advised to invest in equity funds. 
+                        It will provide your funds the much-needed time to combat market movements and fluctuations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liquid Mutual Funds -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="Liquid_Mutual_Funds">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">What is a Liquid Mutual Fund?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        A Liquid Mutual Fund is a debt fund which invests in fixed-income instruments like commercial paper, government securities, treasury bills, etc. with a maturity of up to 91 days. 
+                        The net asset value or NAV of a liquid fund is calculated for 365 days. Further, investors can get their withdrawals processed within 24 hours. 
+                        These funds carry the lowest interest-rate risk in the debt funds category. 
+                    </p>
+                </div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Who should invest in Liquid Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        If you have a good amount of cash which is not invested anywhere and are looking for a short-duration investment option with lower risks, then liquid funds are ideal for you. 
+                        Your money can earn better returns than merely lying in a savings account along with the same liquidity. Many investors use liquid funds as a stepping stone to investing in equity funds. 
+                        They start with investing in a liquid fund and then initiate a systematic transfer plan to an equity fund. This helps them invest in equity funds in a phased manner and benefit from Rupee Cost Averaging.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Short Term Mutual Funds -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="Short_term_Mutual_Funds">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">What are Short Term Mutual Fund?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Short-Term Mutual funds are open-ended funds having a maturity period ranging from 15 days to 91 days. 
+                        The maturity period of these funds varies depending on the maturity period of the underlying instruments. 
+                        These funds invest predominantly in high-quality assets that are of low risk.
+                    </p>
+                </div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Who should invest in Short Term Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        This fund is an excellent investment option for risk-averse investors. 
+                        If you are looking for options to park your surplus funds (for less than a month), then liquid funds are a great option. 
+                        If you have a longer investment horizon (two to four months), then you can invest in ultra-short-term funds. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Arbitrage Mutual Funds -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="Arbitrage_Mutual_Funds">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">What are Arbitrage Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Arbitrage funds work on the mispricing of equity shares in the spot and futures market. Mostly, it takes advantage of the price differences between current and future securities to generate maximum returns. 
+                        The fund manager simultaneously buys shares in the cash market and sells it in futures or derivatives markets. The difference in the cost price and the selling price is the return you earn.
+                    </p>
+                </div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Who should invest in Arbitrage Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Arbitrage funds make profits from low-risk buy-and-sell opportunities in the cash and futures market. Their risk level is comparable with that of a pure debt fund. Several arbitrage funds follow Crisil BSE 0.23% Liquid Fund Index as their benchmark.
+                        These funds are apt for those investors who are looking to have equity exposure but are worried about the risk associated with the same. Arbitrage funds are a safe option for risk-averse individuals to safely park their surplus funds when there is a persistent fluctuation in the market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debt Mutual Funds -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="Debt_Mutual_Funds">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">What are Debt Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Debt funds invest in securities which generate fixed income like treasury bills, corporate bonds, commercial papers, government securities, and many other money market instruments. 
+                        All these instruments have a pre-decided maturity date and interest rate that the buyer can earn on maturity – hence the name fixed-income securities. 
+                        The returns are usually not affected by fluctuations in the market. Therefore, debt securities are considered to be low-risk investment options. 
+                    </p>
+                </div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Who should invest in Debt Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Debt funds are highly recommended to investors with lower risk tolerance. Debt funds usually diversify across various securities to ensure stable returns. While there are no guarantees, the returns are usually in an expected range. Hence, low-risk investors find them ideal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Mutual Funds -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="Dynamic_Mutual_Funds">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">What are Dynamic Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Dynamic Mutual Funds have a ‘dynamic’ maturity as well as composition. These funds have an investment objective of delivering optimum returns in falling as well as rising market cycles. 
+                        The fund manager of a dynamic debt fund manages the portfolio dynamically with respect to the changes in the interest rates.
+                        Talking about interest rates, it is important to note that there can be pauses between interest rate changes. These pauses can affect the returns on bonds too. Hence, Dynamic Mutual Funds are a good option for investors who want to generate returns from their bond investments regardless of the interest rates.  
+                    </p>
+                </div>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Who should invest in Debt Mutual Funds?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body mx-3">
+                    <p style="text-align: justify;">
+                        Market savvy investors who are adept in analyzing interest rate movements and investing accordingly can create their own dynamic bond portfolio. 
+                        However, most investors are not savvy enough to make the best calls. Such investors should opt for Dynamic Funds with an investment horizon of around three to five years. 
+                        Further, investors need a moderate risk tolerance to invest in these funds. SIPs are a good way to approach these funds as you can counter interest rate volatility better.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if not deposits==None %}
+    <div id="intro" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-15">
+                    <div>
+                        <div><h2 style="color:  #14bf98;">Deposits of Interest</h2></div>
+                        <table class="table table-striped table-hover">
+                            <th style="background-color: #14bf98;color: white;">Bank</th>
+                            <th style="background-color: #14bf98;color: white;">Rate: Normal Citizens</th>
+                            <th style="background-color: #14bf98;color: white;">Rate: Senior Citizens</th>
+                            <th style="background-color: #14bf98;color: white;">Link</th>
+                            <th style="background-color: #14bf98;color: white;">Deposit Type</th>
+                            {% for deposit in deposits.items %}
+                            <tr>
+                                <td>{{deposit.Bank}}</td>
+                                <td>{{deposit.Rate_Normal}}</td>
+                                <td>{{deposit.Rate_Senior}}</td>
+                                <td><a class="btn-solid-lg page-scroll" href="{{deposit.Link}}" target="_blank" style="color: white;">Visit</a></td>
+                                <td>{{deposit.Deposit_Type}}</td>
+                            </tr>
+                            {% endfor %}
+
+                        </table>
+                        
+                            
+                    
+                    </div> 
+                </div> 
+                
+            </div> 
+        </div> 
+    </div> 
+
+
+    {% endif %}
+    
+
+
+    {% endif %}
+
+
+
+    <!-- Contact -->
+    <div id="contact" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title">CONTACT</div>
+                        <h2>Get In Touch Using The Form</h2>
+                        
+<!-- 
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-pinterest fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-behance fa-stack-1x"></i>
+                            </a>
+                        </span> -->
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                <div class="col-lg-6">
+                    
+                    <!-- Contact Form -->
+                    <form id="contactForm" data-toggle="validator" data-focus="false" method="post">
+                        {{form4.hidden_tag()}}
+                        <div class="form-group">
+
+                            {{form4.email.label()}}
+                            {{form4.email(class="form-control-input", id="cemail")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form4.name.label()}}
+                            {{form4.name(class="form-control-input", id="cpassword")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form4.message.label()}}
+                            {{form4.message(class="form-control-textarea", id="cmessage")}}
+                        </div>
+                        <div class="form-group">
+    
+                            {{form4.submit4(class="form-control-submit-button")}}
+    
+                        </div>
+                    </form>
+                    <!-- end of contact form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form-2 -->
+    <!-- end of contact -->
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-container about">
+                        <h4>Acknowledgement</h4>
+                        <p style="color: white;">The data used in this project has been acquired largely from open source websites that publish data regarding such subject matters.</p>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                
+                
+                
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->  
+    <!-- end of footer -->
+
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright © 2020 <a href="#">finNourish</a></p>
+                </div> <!-- end of col -->
+            </div> <!-- enf of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of copyright --> 
+    <!-- end of copyright -->
+    
+    	
+    <!-- Scripts -->
+    <script src="../static/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="../static/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="../static/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="../static/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="../static/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="../static/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="../static/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+    <script src="../static/isotope.pkgd.min.js"></script> <!-- Isotope for filter -->
+    <script src="../static/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="../static/scripts.js"></script> <!-- Custom scripts -->
+    <!-- <script src="../static/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../static/bootstrap/js/popper.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/select2/select2.min.js"></script>
+    <script src="../static/main.js"></script> -->
+
+</body>
+</html>
