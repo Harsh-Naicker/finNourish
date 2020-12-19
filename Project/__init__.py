@@ -247,6 +247,9 @@ def get_my(i):
 
 dash_app = dash.Dash(__name__, server=app, url_base_pathname='/tracker/', external_stylesheets=[dbc.themes.MINTY])
 dash_app.title='finNourish'
+for view_func in app.view_functions:
+    if view_func.startswith(dash_app.config['url_base_pathname']):
+        app.view_functions[view_func] = login_required(app.view_functions[view_func])
 
 dash_app.layout = html.Div([
     dbc.Row([dbc.Col(html.Div(className="logo",children=[
