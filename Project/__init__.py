@@ -13,7 +13,7 @@ import datetime
 from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager, current_user, login_required
 from flask_mail import Mail, Message
 import psycopg2
 
@@ -416,6 +416,7 @@ def update_savings(value):
     return figure,figure2
 
 @app.route('/dashboard/<id>')
+@login_required
 def render_tracker(id):
     global cur_user
     cur_user=id
