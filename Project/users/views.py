@@ -397,6 +397,8 @@ def update_savings(value):
     if current_user.is_authenticated:
         cur_user=current_user.id
         df = get_saving()
+        df['Date'] = [datetime.datetime.strptime(x,'%m-%Y') for x in df['month']]
+        df = df.sort_values(by=['Date'],ignore_index=True)
         Date=df['month']
         
 
