@@ -16,6 +16,7 @@ import psycopg2
 core=Blueprint('core',__name__)
 
 DATABASE_URL='postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj'
+engine=create_engine("postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj")
 
 def get_recurring_deposits(url):
     page = requests.get(url)
@@ -172,21 +173,24 @@ def connect_to_db(db_file):
             sql_conn.close()
 
 def insert_value_to_deposits_table(table_name,data_frame):
+    global engine
     conn = connect_to_db(DATABASE_URL)
+    # engine=create_engine("postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj")
+    # conn=engine.connect()
     if conn is not None:
         c = conn.cursor()
-        c.execute('CREATE TABLE IF NOT EXISTS '+table_name+
-                  '(id                  INTEGER,'
-                  'Bank                 VARCHAR,'
-                  'Rate_Normal          VARCHAR,'
-                  'Rate_Senior          VARCHAR,'
-                  'Link                 VARCHAR,'
-                  'Deposit_Type         VARCHAR)')
+        # c.execute('CREATE TABLE IF NOT EXISTS '+table_name+
+        #           '(id                  INTEGER,'
+        #           'Bank                 VARCHAR,'
+        #           'Rate_Normal          VARCHAR,'
+        #           'Rate_Senior          VARCHAR,'
+        #           'Link                 VARCHAR,'
+        #           'Deposit_Type         VARCHAR)')
         df = data_frame
         df.insert(0,'ID',df.index+1)
         # df = df.drop('',axis = 1)
         df.columns = get_column_names_from_db_table(c,table_name)
-        df.to_sql(table_name,con=conn,if_exists='replace',index=False)
+        df.to_sql(table_name,con=engine.connect(),if_exists='replace',index=False)
         conn.commit()
         conn.close()
         print('SQL insert process finished')
@@ -194,24 +198,27 @@ def insert_value_to_deposits_table(table_name,data_frame):
         print('Connection to database failed')
 
 def insert_value_to_table(table_name,data_frame):
+    global engine
     conn = connect_to_db(DATABASE_URL)
+    # engine=create_engine("postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj")
+    # conn=engine.connect()
     if conn is not None:
         c = conn.cursor()
-        c.execute('CREATE TABLE IF NOT EXISTS '+table_name+
-                  '(id                  INTEGER,'
-                  'listing_name         VARCHAR,'
-                  'listing_category     VARCHAR,'
-                  'listing_risk         VARCHAR,'
-                  'listing_1yreturns    VARCHAR,'
-                  'listing_rating       VARCHAR,'
-                  'listing_fund_size    VARCHAR,'
-                  'listing_link         VARCHAR,'
-                  'listing_fund_type    VARCHAR)')
+    #     c.execute('CREATE TABLE IF NOT EXISTS '+table_name+
+    #               '(id                  INTEGER,'
+    #               'listing_name         VARCHAR,'
+    #               'listing_category     VARCHAR,'
+    #               'listing_risk         VARCHAR,'
+    #               'listing_1yreturns    VARCHAR,'
+    #               'listing_rating       VARCHAR,'
+    #               'listing_fund_size    VARCHAR,'
+    #               'listing_link         VARCHAR,'
+    #               'listing_fund_type    VARCHAR)')
         df = data_frame
         df.insert(0,'ID',df.index+1)
         df = df.drop('',axis = 1)
         df.columns = get_column_names_from_db_table(c,table_name)
-        df.to_sql(table_name,con=conn,if_exists='replace',index=False)
+        df.to_sql(table_name,con=engine.connect(),if_exists='replace',index=False)
         conn.commit()
         conn.close()
         print('SQL insert process finished')
@@ -226,7 +233,7 @@ def get_column_names_from_db_table(sql_cursor,table_name):
     
     column_names = list()
     for name in table_column_names:
-        column_names.append(name[1])
+        column_names.append(name[0])
     return column_names
 
 

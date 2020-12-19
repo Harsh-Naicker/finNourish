@@ -203,21 +203,21 @@ def expenses_chart(value):
     return figure
 
 def get_saving():
-    per_month_income = f'''SELECT date AS Income_Date,substr(date,6,2) AS Month,SUM(income_amount) AS Total_Income FROM incomes WHERE user_id = '''+ str(cur_user) +''' GROUP BY substr(date,6,2) '''
+    per_month_income = f'''SELECT to_char(date,'MM-YYYY') AS Month,SUM(income_amount) AS Total_Income FROM incomes WHERE user_id = '''+ str(cur_user)+''' GROUP BY 1'''
     df = fetch_data(per_month_income)
-    per_month_expenses = f'''SELECT date AS Expense_Date,substr(date,6,2) AS Month,SUM(expenditure_amount) AS Total_Expenses FROM expenditures WHERE user_id = '''+ str(cur_user) + ''' GROUP BY substr(date,6,2)''' 
+    per_month_expenses = f'''SELECT to_char(date,'MM-YYYY') AS Month,SUM(expenditure_amount) AS Total_Expenses FROM expenditures WHERE user_id = '''+ str(cur_user)+''' GROUP BY 1''' 
     df1 = fetch_data(per_month_expenses)
-    result = pd.merge(df1,df,on=['Month'],how='outer')
+    result = pd.merge(df1,df,on=['month'],how='outer')
     result = result.fillna(0)
     cur = f'''SELECT current_assets FROM users WHERE id = '''+str(cur_user)
     cur_asset = fetch_data(cur)
     cur_asset = cur_asset.values[0][0]
-    result['Savings Per month'] = result['Total_Income'] - result['Total_Expenses']
+    result['Savings Per month'] = result['total_income'] - result['total_expenses']
     result['Cumulative Savings'] = result['Savings Per month'].cumsum()
     result['Cumulative Savings'] = result['Cumulative Savings']
-    for i in range(len(result['Expense_Date'])):
-        if result['Expense_Date'][i]==0:
-            result['Expense_Date'][i]=result['Income_Date'][i]
+    # for i in range(len(result['Expense_Date'])):
+    #     if result['Expense_Date'][i]==0:
+    #         result['Expense_Date'][i]=result['Income_Date'][i]
     return result
 
 def get_my(i):
@@ -322,9 +322,10 @@ def update_graph(income,expense):
     [Input('income-selector','value')])
 def update_savings(value):
     df = get_saving()
-    Date=[get_my(i) for i in df['Income_Date']]
-    if len(df['Expense_Date'])!=0:
-        Date = [get_my(i) for i in df['Expense_Date']]
+    Date=df['month']
+    # Date=[get_my(i) for i in df['Income_Date']]
+    # if len(df['Expense_Date'])!=0:
+    #     Date = [get_my(i) for i in df['Expense_Date']]
     
     Savings = df['Savings Per month']
     Cum_saving = df['Cumulative Savings']
