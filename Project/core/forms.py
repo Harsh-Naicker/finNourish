@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, RadioField, FloatField, DateField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, RadioField, FloatField, DateField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from flask_wtf.file import FileField, FileAllowed
@@ -35,7 +35,7 @@ class RegistrationForm(FlaskForm):
 class ContactForm(FlaskForm):
     email=StringField('Email', validators=[DataRequired(), Email()])
     name=StringField('Name', validators=[DataRequired()])
-    message=StringField('Message', validators=[DataRequired()])
+    message=TextAreaField('Message', render_kw={"rows":70, "cols":11}, validators=[DataRequired()])
     submit4=SubmitField('Send Message')
 
 class UpdateListing(FlaskForm):

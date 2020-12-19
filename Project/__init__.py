@@ -14,6 +14,7 @@ from flask import Flask, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, current_user
+from flask_mail import Mail, Message
 import psycopg2
 
 app=Flask(__name__)
@@ -24,6 +25,17 @@ DATABASE_URL='postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b
 basedir=os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI']=DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT']=587
+app.config['MAIL_USE_TLS']=True
+app.config['MAIL_USERNAME']='finnourish@gmail.com'
+app.config['MAIL_PASSWORD']='xqvbkpmmufasomhq'
+app.config['MAIL_DEFAULT_SENDER']='finnourish@gmail.com'
+app.config['MAIL_MAX_MAILS']=None
+app.config['MAIL_ASCII_ATTACHMENTS']=False
+
+mail=Mail(app)
 
 db = SQLAlchemy(app)
 Migrate(app,db)
@@ -90,19 +102,19 @@ def pie_chart_income():
     income_amount = income['income_amount']
     v=[0,0,0]
     l=['a','b','c']
-    fig = go.Figure(data = [go.Pie(labels=l, values=v,name = "Income Distribution")])
+    fig = go.Figure(data = [go.Pie(labels=l, values=v,name = "<b>Income Distribution</b>")])
     fig.update_layout(
-    title_text = "No Income Data Available",
-    annotations=[dict(text='',x=0.50,y=0.5,font_size=20,showarrow=False)]
+    title_text = "<b>No Income Data Available</b>",
+    annotations=[dict(text='',x=0.50,y=0.5,font_size=20,showarrow=False)],paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)'
     )
 
     if len(income_amount)!=0:
-        fig = go.Figure(data = [go.Pie(labels=income_source, values=income_amount,name = "Income Distribution")])
+        fig = go.Figure(data = [go.Pie(labels=income_source, values=income_amount,name = "<b>Income Distribution</b>")])
         fig.update_traces(hole = 0.4, hoverinfo="label+percent+name")
 
         fig.update_layout(
-        title_text = "Income Distribution",
-        annotations=[dict(text='Income',x=0.50,y=0.5,font_size=20,showarrow=False)]
+        title_text = "<b>Income Distribution</b>",
+        annotations=[dict(text='Income',x=0.50,y=0.5,font_size=20,showarrow=False)],paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)'
         )
 
 
@@ -116,20 +128,20 @@ def pie_chart_expense():
 
     v=[0,0,0]
     l=['a','b','c']
-    fig = go.Figure(data = [go.Pie(labels=l, values=v,name = "Income Distribution")])
+    fig = go.Figure(data = [go.Pie(labels=l, values=v,name = "<b>Expenditure Distribution</b>")])
     fig.update_layout(
-    title_text = "No Expense Data Available",
-    annotations=[dict(text='',x=0.50,y=0.5,font_size=20,showarrow=False)]
+    title_text = "<b>No Expense Data Available</b>",
+    annotations=[dict(text='',x=0.50,y=0.5,font_size=20,showarrow=False)],paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)'
     )
 
     if len(expense_amt)!=0:
-        fig = go.Figure(data = [go.Pie(labels=expense_cat, values=expense_amt,name = "Expenditure Distribution")])
+        fig = go.Figure(data = [go.Pie(labels=expense_cat, values=expense_amt,name = "<b>Expenditure Distribution</b>")])
         fig.update_traces(hole = 0.4, hoverinfo="label+percent+name")
  
 
         fig.update_layout(
-        title_text = "Expenditure Distribution",
-        annotations=[dict(text='Expense',x=0.50,y=0.5,font_size=20,showarrow=False)]
+        title_text = "<b>Expenditure Distribution</b>",
+        annotations=[dict(text='Expense',x=0.50,y=0.5,font_size=20,showarrow=False)],paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)'
         )
 
     
@@ -145,22 +157,26 @@ def income_chart(value):
     defy=[0,0,0,0]
     figure = go.Figure(
         data = [
-               go.Bar(x=defx,y=defy)
+               go.Bar(x=defx,y=defy,marker_color='#14bf98')
         ],
         layout=go.Layout(
-            title='No Income Data',
-            showlegend=False
+            title='<b>No Income Data</b>',
+            showlegend=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
         )
     )
     if len(dates)!=0:
         figure = go.Figure(
             data = [
-                go.Bar(x=dates,y=amount,text=source,textposition='auto')
+                go.Bar(x=dates,y=amount,text=source,textposition='auto',marker_color='#14bf98')
             ],
             layout=go.Layout(
                 xaxis={'type':'category'},
-                title='Amount From '+str(value),
-                showlegend=False
+                title='<b>Amount From '+str(value)+'</b>',
+                showlegend=False,
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)'
             )
         )
     
@@ -177,23 +193,27 @@ def expenses_chart(value):
     defy=[0,0,0,0]
     figure = go.Figure(
         data = [
-               go.Bar(x=defx,y=defy)
+               go.Bar(x=defx,y=defy,marker_color='#14bf98')
         ],
         layout=go.Layout(
-            title='No Expense Data',
-            showlegend=False
+            title='<b>No Expense Data</b>',
+            showlegend=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
         )
     )
 
     if len(dates)!=0:
         figure = go.Figure(
             data = [
-                go.Bar(x=dates,y=amount,text=item,textposition='auto')
+                go.Bar(x=dates,y=amount,text=item,textposition='auto',marker_color='#14bf98')
             ],
             layout=go.Layout(
                 xaxis={'type':'category'},
-                title='Amount used for '+str(value),
-                showlegend=False
+                title='<b>Amount used for '+str(value)+'</b>',
+                showlegend=False,
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)'
             )
         )
 
@@ -226,18 +246,25 @@ def get_my(i):
     return Date
 
 dash_app = dash.Dash(__name__, server=app, url_base_pathname='/tracker/', external_stylesheets=[dbc.themes.MINTY])
+dash_app.title='finNourish'
 
 dash_app.layout = html.Div([
-    dbc.Row(dbc.Col(html.H3("Budget Tracker"),
-                    width = {'size':2,'offset':5},
+    dbc.Row([dbc.Col(html.Div(className="logo",children=[
+                    html.Img(src='https://i.ibb.co/BC33M3V/JH-Solutions-1.png%22')
+                    ]),
+                    width = {'size':5},
                    ),
-           ),
-    dbc.Row(dbc.Col(html.Div("Select Income Source and Expense Category"),
-                   width = {'size':7,'offset':5},
+            dbc.Col(html.H1("Budget Tracker"),
+                    width = {'size':3,'offset':5},
+                   ),
+    ]),
+    dbc.Row(dbc.Col(html.H4("Select Income Source and Expense Category"),
+                   
                    ),
            ),
     dbc.Row(
     [
+        
         dbc.Col(dcc.Dropdown(id='income-selector',
                              placeholder = 'Income Sources',
                              options=get_income_source(),
@@ -254,12 +281,15 @@ dash_app.layout = html.Div([
     ),
     dbc.Row(
     [
-        dbc.Col(dcc.Graph(id='pie_chart1',figure={}),
-               width=6,lg={'size':6,'offset':0,'order':'first'}
-               ),
-        dbc.Col(dcc.Graph(id='pie_chart2',figure={}),
-               width=6,lg={'size':6,'offset':0,'order':'last'}
-               ),
+        dbc.Col(html.Div(className="graph",children=[
+            dcc.Graph(id='pie_chart1',figure={})
+            
+        ]),width=6,lg={'size':6,'offset':0,'order':'first'}),
+        
+        dbc.Col(html.Div(className="graph",children=[
+            dcc.Graph(id='pie_chart2',figure={})
+            
+        ]),width=6,lg={'size':6,'offset':0,'order':'last'}),
     ]
     ),
     
@@ -334,42 +364,50 @@ def update_savings(value):
     defy=[0,0,0,0]
     figure = go.Figure(
         data = [
-               go.Bar(x=defx,y=defy)
+               go.Bar(x=defx,y=defy, marker_color='#14bf98')
         ],
         layout=go.Layout(
-            title='No Savings Data',
-            showlegend=False
+            title='<b>No Savings Data</b>',
+            showlegend=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
         )
     )
     
     if len(Savings)!=0:
         figure = go.Figure(
             data = [
-                go.Bar(x=Date,y=Savings,text=int(Savings),textposition='auto')
+                go.Bar(x=Date,y=Savings,text=int(Savings),textposition='auto', marker_color=' #14bf98')
             ],
             layout=go.Layout(
-                title='Amount Saved per month ',
-                showlegend=False
+                title='<b>Amount Saved Per Month</b>',
+                showlegend=False,
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)'
             )
         )
     figure2 = go.Figure(
         data = [
-               go.Bar(x=defx,y=defy)
+               go.Bar(x=defx,y=defy,marker_color=' #14bf98')
         ],
         layout=go.Layout(
-            title='No Cumulative Savings Data',
-            showlegend=False
+            title='<b>No Cumulative Savings Data</b>',
+            showlegend=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
         )
     )
 
     if len(Cum_saving)!=0:
         figure2 = go.Figure(
             data = [
-                go.Bar(x=Date,y=Cum_saving,text=int(Cum_saving),textposition='auto')
+                go.Bar(x=Date,y=Cum_saving,text=int(Cum_saving),textposition='auto',marker_color=' #14bf98')
             ],
             layout=go.Layout(
-                title='Net Savings After Each Month',
-                showlegend=False
+                title='<b>Net Savings After Each Month</b>',
+                showlegend=False,
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)'
             )
         )
 

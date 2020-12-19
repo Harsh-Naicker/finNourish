@@ -1,7 +1,7 @@
 from flask import Flask, flash, render_template, request, Blueprint, redirect, url_for
 from Project.core.forms import RegistrationForm, LoginForm, ContactForm, UpdateListing, IncomeForm, ExpenditureForm
 from Project.models import User, InvestmentsList, DepositsList, Incomes, Expenditures
-from Project import db
+from Project import db, mail
 from flask_login import login_user, current_user, logout_user, login_required
 import time
 import requests
@@ -11,12 +11,129 @@ import re
 import sqlite3 as sql
 from sqlite3 import Error
 from sqlalchemy import create_engine
+from flask_mail import Mail, Message
 import psycopg2
 
 core=Blueprint('core',__name__)
 
 DATABASE_URL='postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj'
 engine=create_engine("postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj")
+
+def signup_mail(name,email):
+    global mail
+    msg=Message('Welcome to finNourish!',recipients=[email])
+    msg.html='''<div class="body_changes" style="color: white; background-color: #000000; background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; width:750px; margin-right: auto; margin-left: auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" >
+
+        <div style="margin-right: 20px;margin-left: 20px;">
+            <br>
+            <img src="https://i.ibb.co/2qG2YCw/fin-Nourish.png%22" style="width:400px;display: block; margin-left: auto; margin-right: auto;" align="center;" alt="finNourish-Logo" border="0">
+            
+            <p style="font-size: 130%;color: #14bf98;">
+                <b>Dear {},</b>
+            </p>
+            <p style="font-size: 130%;text-align: justify;color: white;">
+                Thank you for signing up with <span style="color: #14bf98"><b>finNourish!</b></span> To avail our dedicated <span style="color: #14bf98"><b>smart investments and deposits recommendations</b></span> log into your account and experience seemless access to the latest information.
+                <br><br>
+                Track your income and expenses with our <span style="color: #14bf98"><b>budget tracker</b></span>. You can monitor your assets, sources of income, categories of expenditures and monthly savings.
+            </p>
+            <p style="font-size: 130%;color: #14bf98;">
+                <b>
+                    Regards,<br>
+                    Team finNourish
+                </b>
+
+            </p>
+            
+            <p>
+                <a href="https://fin-nourish.herokuapp.com/" target="_blank"><button type="button" style="  border: none;
+                    color: white;
+                    padding: 10px 20px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 15px;
+                   
+                    cursor: pointer;
+                    background-color: #14bf98;"><b>Visit Website</b></button></a>
+    
+            </p>
+
+            
+            <br>
+
+            
+        
+
+        </div>
+
+    </div>'''.format(name)
+    
+    mail.send(msg)
+
+def contact_mail(name,email, message):
+    global mail
+    msg=Message('Thank you for contacting us!',recipients=[email])
+    msg.html='''<div class="body_changes" style="color: white; background-color: #000000; background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; width:750px; margin-right: auto; margin-left: auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" >
+
+        <div style="margin-right: 20px;margin-left: 20px;">
+            <br>
+            <img src="https://i.ibb.co/2qG2YCw/fin-Nourish.png%22" style="width:400px;display: block; margin-left: auto; margin-right: auto;" align="center;" alt="finNourish-Logo" border="0">
+            
+            <p style="font-size: 130%;color: #14bf98;">
+                <b>Dear {},</b>
+            </p>
+            <p style="font-size: 130%;text-align: justify;color: white;">
+                Thank you for reaching out to <span style="color: #14bf98"><b>finNourish!</b></span> Somebody from our team will contact you soon to better serve you and address your query.
+                
+            </p>
+            <p style="font-size: 130%;color: #14bf98;">
+                <b>
+                    Regards,<br>
+                    Team finNourish
+                </b>
+
+            </p>
+            
+            <p>
+                <a href="https://fin-nourish.herokuapp.com/" target="_blank"><button type="button" style="  border: none;
+                    color: white;
+                    padding: 10px 20px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 15px;
+                   
+                    cursor: pointer;
+                    background-color: #14bf98;"><b>Visit Website</b></button></a>
+    
+            </p>
+
+            
+            <br>
+
+            
+        
+
+        </div>
+
+    </div>'''.format(name)
+    
+    mail.send(msg)
+    msg2=Message('New Contact Enquiry',recipients=['finnourish@gmail.com'])
+    msg2.body='Name of Applicant: {}\n\nEmail ID: {}\n\nMessage: {}'.format(name,email,message)
+    mail.send(msg2)
+
+
+# def admin_mail(name, email, message):
+#     global mail
+    
+#     msg2=Message('New Contact Enquiry',recipients=['finnourish@gmail.com'])
+#     msg2.body='Name of Applicant: {}\n\nEmail ID: {}\n\nMessage: {}'.format(name,email,message)
+#     mail.send(msg2)
 
 def get_recurring_deposits(url):
     page = requests.get(url)
@@ -243,13 +360,14 @@ def index():
     form2=RegistrationForm()
     form1=LoginForm()
     form4=ContactForm()
-    form5=UpdateListing()
+    # form5=UpdateListing()
     form6=IncomeForm()
     form7=ExpenditureForm()
 
     if form2.submit2.data and form2.validate():
         if User.query.filter_by(email=form1.email.data).first() == None:
             user=User(email=form2.email.data, username=form2.username.data, password=form2.password.data, ip1=form2.invpref1.data, ip2=form2.invpref2.data, deposit_pref=form2.depopref.data, current_assets=form2.current_balance.data)
+            signup_mail(form2.username.data, form2.email.data)
             db.session.add(user)
             db.session.commit()
         else:
@@ -267,12 +385,12 @@ def index():
             flash('Log in Success')
             next=request.args.get('next')
 
-            final = mutual_funds_scraper()
-            insert_value_to_table('investments_list',final)
+            # final = mutual_funds_scraper()
+            # insert_value_to_table('investments_list',final)
 
-            deposits=get_deposits()
-            deposits.index=[i for i in range(len(deposits.index))]
-            insert_value_to_deposits_table('deposits_list',deposits)
+            # deposits=get_deposits()
+            # deposits.index=[i for i in range(len(deposits.index))]
+            # insert_value_to_deposits_table('deposits_list',deposits)
 
             if next==None or not next[0]=='/':
                 next=url_for('core.index')
@@ -280,16 +398,18 @@ def index():
             return redirect(next)
     
     if form4.submit4.data and form4.validate():
+        contact_mail(form4.name.data, form4.email.data, form4.message.data)
+        # admin_mail(form4.name.data, form4.email.data, form4.message.data)
         return redirect(url_for('core.index'))
     
-    if form5.submit5.data and form5.validate():
+    # if form5.submit5.data and form5.validate():
         
-        final = mutual_funds_scraper()
-        insert_value_to_table('investments_list',final)
+    #     final = mutual_funds_scraper()
+    #     insert_value_to_table('investments_list',final)
 
-        deposits=get_deposits()
-        deposits.index=[i for i in range(len(deposits.index))]
-        insert_value_to_deposits_table('deposits_list',deposits)
+    #     deposits=get_deposits()
+    #     deposits.index=[i for i in range(len(deposits.index))]
+    #     insert_value_to_deposits_table('deposits_list',deposits)
 
         
         # db.session.query(DepositsList).delete()
@@ -300,7 +420,7 @@ def index():
         #     db.session.add(deposit)
         #     db.session.commit()
 
-        return redirect(url_for('core.index'))
+        # return redirect(url_for('core.index'))
     
     if form6.submit6.data and form6.validate():
         income=Incomes(user_id=current_user.id, date=form6.date.data, income_source=form6.source.data, source_name=form6.name.data, income_amount=form6.amount.data)
@@ -330,4 +450,4 @@ def index():
         deposits=DepositsList.query.filter_by(Deposit_Type=current_user.deposit_pref).paginate(per_page=100)
 
 
-    return render_template('index.html', form1=form1, form2=form2, form4=form4, form5=form5, form6=form6, form7=form7, investments=investments, investments2=investments2, deposits=deposits)
+    return render_template('index.html', form1=form1, form2=form2, form4=form4, form6=form6, form7=form7, investments=investments, investments2=investments2, deposits=deposits)
