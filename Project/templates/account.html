@@ -79,9 +79,7 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="{{url_for('users.logout')}}">LOGOUT</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{{url_for('users.render_tracker')}}" target="_blank">BUDGET TRACKER</a>
-                </li>
+                
                 {% else %}
 
                 <li class="nav-item">
@@ -141,7 +139,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div>
-                        <div><h2 style="color:  #14bf98;">Current Assests: ₹{{current_user.current_assets}}</h2></div>
+                        <div><h2 style="color:  #14bf98;">Current Assests: ₹{{current_user.current_assets}}</h2><a class="btn-solid-lg page-scroll" href="{{url_for('users.render_tracker')}}" target="_blank" style="color: white;">Budget Tracker</a></h2></div></div>
                     </div>
                 </div>
             </div>

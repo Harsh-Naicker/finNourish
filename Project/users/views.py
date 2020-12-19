@@ -420,7 +420,7 @@ def update_savings(value):
         if len(Savings)!=0:
             figure = go.Figure(
                 data = [
-                    go.Bar(x=Date,y=Savings,text=int(Savings),textposition='auto', marker_color=' #14bf98')
+                    go.Bar(x=Date,y=Savings,text=Savings,textposition='auto', marker_color=' #14bf98')
                 ],
                 layout=go.Layout(
                     title='<b>Amount Saved Per Month</b>',
@@ -444,7 +444,7 @@ def update_savings(value):
         if len(Cum_saving)!=0:
             figure2 = go.Figure(
                 data = [
-                    go.Bar(x=Date,y=Cum_saving,text=int(Cum_saving),textposition='auto',marker_color=' #14bf98')
+                    go.Bar(x=Date,y=Cum_saving,text=Cum_saving,textposition='auto',marker_color=' #14bf98')
                 ],
                 layout=go.Layout(
                     title='<b>Net Savings After Each Month</b>',
