@@ -15,12 +15,12 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     email= StringField('Email', validators=[DataRequired(), Email()])
     username=StringField('Username', validators=[DataRequired()])
-    password=PasswordField('Password', validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords must match!')])
-    pass_confirm=PasswordField('Confirm Password', validators=[DataRequired()])
+    password=PasswordField('Password', validators=[DataRequired()])
+    pass_confirm=PasswordField('Confirm Password', validators=[DataRequired(),EqualTo('password')])
 
-    invpref1=SelectField('Investment Preference 1', choices=[('Equity_Mutual_Funds','Equity Mutual Funds'), ('Liquid_Mutual_Funds','Liquid Mutual Funds'), ('Short_term_Mutual_Funds','Short Term Mutual Funds'),('Arbitrage_Mutual_Funds','Arbitrage Mutual Funds'), ('Debt_Mutual_Funds','Debt Mutual Funds'), ('Dynamic_Mutual_Funds','Dynamic Mutual Funds')])    
-    invpref2=SelectField('Investment Preference 2', choices=[('Equity_Mutual_Funds','Equity Mutual Funds'), ('Liquid_Mutual_Funds','Liquid Mutual Funds'), ('Short_term_Mutual_Funds','Short Term Mutual Funds'),('Arbitrage_Mutual_Funds','Arbitrage Mutual Funds'), ('Debt_Mutual_Funds','Debt Mutual Funds'), ('Dynamic_Mutual_Funds','Dynamic Mutual Funds')])
-    depopref=SelectField('Deposit Preference', choices=[('Recurring Deposits','Recurring Deposits'), ('Fixed Deposits','Fixed Deposits')])
+    invpref1=SelectField('Investment Preference 1', choices=[('Select','Select'),('Equity_Mutual_Funds','Equity Mutual Funds'), ('Liquid_Mutual_Funds','Liquid Mutual Funds'), ('Short_term_Mutual_Funds','Short Term Mutual Funds'),('Arbitrage_Mutual_Funds','Arbitrage Mutual Funds'), ('Debt_Mutual_Funds','Debt Mutual Funds'), ('Dynamic_Mutual_Funds','Dynamic Mutual Funds')],validators=[DataRequired()])    
+    invpref2=SelectField('Investment Preference 2', choices=[('Select','Select'),('Equity_Mutual_Funds','Equity Mutual Funds'), ('Liquid_Mutual_Funds','Liquid Mutual Funds'), ('Short_term_Mutual_Funds','Short Term Mutual Funds'),('Arbitrage_Mutual_Funds','Arbitrage Mutual Funds'), ('Debt_Mutual_Funds','Debt Mutual Funds'), ('Dynamic_Mutual_Funds','Dynamic Mutual Funds')],validators=[DataRequired()])
+    depopref=SelectField('Deposit Preference', choices=[('Select','Select'),('Recurring Deposits','Recurring Deposits'), ('Fixed Deposits','Fixed Deposits')],validators=[DataRequired()])
 
     current_balance=FloatField('Current Balance (₹)', validators=[DataRequired()])
     submit2=SubmitField('Sign Up')

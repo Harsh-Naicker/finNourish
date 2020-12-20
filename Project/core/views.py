@@ -371,18 +371,23 @@ def index():
             db.session.add(user)
             db.session.commit()
         else:
-            flash('An account with this username already exists')
-            time.sleep(3)
+            # if(form2.pass_confirm.data!=form2.password.data):
+            #     flash('The passwords must match')
+            #     print("Passwords dont match")
+            #     return redirect(url_for('core.index'))
+            flash('An account with this email already exists')
+            # time.sleep(3)
 
         
         return redirect(url_for('core.index'))
     
     if form1.submit1.data and form1.validate():
+        next=url_for('core.index')
 
         user=User.query.filter_by(email=form1.email.data).first()
         if user is not None and user.check_password(form1.password.data):
             login_user(user)
-            flash('Log in Success')
+            # flash('Log in Success')
             next=request.args.get('next')
 
             # final = mutual_funds_scraper()
@@ -394,6 +399,9 @@ def index():
 
             if next==None or not next[0]=='/':
                 next=url_for('core.index')
+        else:
+            flash('Wrong Log in credentials')
+
 
             return redirect(next)
     
