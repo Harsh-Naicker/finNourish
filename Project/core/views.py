@@ -445,7 +445,7 @@ def index():
     
     if form7.submit7.data and form7.validate():
         expense=Expenditures(expenditure_type=form7.category.data, user_id=current_user.id, d=form7.date.data, payee=form7.name.data, amount=form7.amount.data)
-        if form7.data.data>=date.today():
+        if form7.date.data>=date.today():
             current_user.current_assets-=form7.amount.data
         db.session.add(expense)
         db.session.commit()
