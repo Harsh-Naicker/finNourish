@@ -13,6 +13,7 @@ from sqlite3 import Error
 from sqlalchemy import create_engine
 from flask_mail import Mail, Message
 import psycopg2
+from datetime import date
 
 core=Blueprint('core',__name__)
 
@@ -432,7 +433,8 @@ def index():
     
     if form6.submit6.data and form6.validate():
         income=Incomes(user_id=current_user.id, date=form6.date.data, income_source=form6.source.data, source_name=form6.name.data, income_amount=form6.amount.data)
-        current_user.current_assets+=form6.amount.data
+        if form6.date.data>=date.today():
+            current_user.current_assets+=form6.amount.data
         db.session.add(income)
         db.session.commit()
         form6.date.data=None
@@ -443,7 +445,8 @@ def index():
     
     if form7.submit7.data and form7.validate():
         expense=Expenditures(expenditure_type=form7.category.data, user_id=current_user.id, d=form7.date.data, payee=form7.name.data, amount=form7.amount.data)
-        current_user.current_assets-=form7.amount.data
+        if form7.data.data>=date.today():
+            current_user.current_assets-=form7.amount.data
         db.session.add(expense)
         db.session.commit()
         return redirect(url_for('core.index'))

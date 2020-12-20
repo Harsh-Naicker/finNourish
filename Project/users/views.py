@@ -282,7 +282,7 @@ def get_saving():
     result['Savings Per month'] = result['total_income'] - \
         result['total_expenses']
     result['Cumulative Savings'] = result['Savings Per month'].cumsum()
-    result['Cumulative Savings'] = result['Cumulative Savings']
+    # result['Cumulative Savings'] = result['Cumulative Savings']
     # for i in range(len(result['Expense_Date'])):
     #     if result['Expense_Date'][i]==0:
     #         result['Expense_Date'][i]=result['Income_Date'][i]
