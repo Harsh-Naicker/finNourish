@@ -17,8 +17,8 @@ from datetime import date
 
 core=Blueprint('core',__name__)
 
-DATABASE_URL='postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj'
-engine=create_engine("postgres://cmreepqbqbovqd:fd3fc3ff00a90486bfbba4ce5742a70f6f953d3b3f516d0c672577a8490e5763@ec2-54-196-89-124.compute-1.amazonaws.com:5432/d62ikdp30jv2bj")
+DATABASE_URL='postgres://wrdnwasvsmdeqy:124ec789f3b8a3ea30f00638b2619fbc167e205b1d99c1d616e00502b3ad30e2@ec2-54-167-168-52.compute-1.amazonaws.com:5432/d6n4hthuhlvp5d'
+engine=create_engine("postgres://wrdnwasvsmdeqy:124ec789f3b8a3ea30f00638b2619fbc167e205b1d99c1d616e00502b3ad30e2@ec2-54-167-168-52.compute-1.amazonaws.com:5432/d6n4hthuhlvp5d")
 
 def signup_mail(name,email):
     global mail
